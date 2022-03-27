@@ -1,5 +1,5 @@
 
-import claseOrdenes from '../persistencia/daos/claseordenes.js'
+import claseOrdenes from '../persistencia/daos/claseOrdenes.js'
 const ordenes = new claseOrdenes()
 
 
