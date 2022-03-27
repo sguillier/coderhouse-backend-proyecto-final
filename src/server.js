@@ -3,13 +3,13 @@ import express from 'express'
 import session from "express-session";
 
 import routerAuth from './routers/routerAuth.js'
-import routerCarritos from './routers/routerCarritos.js'
+import routerOrdenes from './routers/routerOrdenes.js'
 import routerProductos from './routers/routerProductos.js'
 import socketConnection from "./socket/socketConnection.js";
 
 
 const sessionMiddleware = session({
-    secret: 'clave-secreta',
+    secret: 'shhhhhhhhhhhhhhhhhh',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -50,7 +50,7 @@ app.use(express.static('public'))
 
 app.use('/api/auth', routerAuth(passport))
 app.use('/api/productos', routerProductos)
-app.use('/api/carritos', routerCarritos)
+app.use('/api/ordenes', routerOrdenes)
 
 
 

@@ -1,14 +1,14 @@
-import EditaCarrito from "./EditaCarrito.js"
+import EditaOrden from "./EditaOrden.js"
 import {URL_RAIZ} from "../../../url/index.js"
 
-const Carritos = async () => {
-
-    const request = await fetch(URL_RAIZ + '/api/carritos')
+const Ordenes = async () => {
+    
+    const request = await fetch(URL_RAIZ + '/api/ordenes')
     const items = await request.json()
     console.log(items)
 
 
-    let html = ` <h2> Carritos </h2> <br>
+    let html = ` <h2> Ordenes </h2> <br>
     <div class="item-list-card-container">
     `
     items.forEach(item => {
@@ -37,7 +37,7 @@ const Carritos = async () => {
                     Eliminar
                 </button>
                 <button id="item-card-button-edit-${item.id}" class="btn btn-danger item-card-button-edit">
-                    Editar
+                    Ver/Editar
                 </button>
             </div>
         </div>
@@ -50,23 +50,27 @@ const Carritos = async () => {
 
 
     const eliminar = async (id) => {
-        const urlApi = URL_RAIZ + '/api/carritos/' + id
+        const urlApi = URL_RAIZ + '/api/ordenes/' + id
 
         const response = await fetch(urlApi, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         });
-        Carritos()
+        await Ordenes()
     }
 
 
 
     items.forEach(item => {
         const botonEliminar = document.getElementById(`item-card-button-delete-${item.id}`)
-        botonEliminar.addEventListener('click', () => { eliminar(item.id) })
+        botonEliminar.addEventListener('click', async () => { 
+            await eliminar(item.id) 
+        })
 
         const botonEditar = document.getElementById(`item-card-button-edit-${item.id}`)
-        botonEditar.addEventListener('click', () => { EditaCarrito(item) })
+        botonEditar.addEventListener('click', async () => { 
+            await EditaOrden(item) 
+        })
     })
 
 
@@ -74,4 +78,4 @@ const Carritos = async () => {
 
 }
 
-export default Carritos
+export default Ordenes

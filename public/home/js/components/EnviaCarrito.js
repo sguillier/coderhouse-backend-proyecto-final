@@ -96,7 +96,7 @@ const EnviaCarrito = async () => {
             productos: arrayCarrito,
             total: total
         }
-        const urlApi = URL_RAIZ + '/api/carritos'
+        const urlApi = URL_RAIZ + '/api/ordenes'
         fetch(urlApi, {
             method: 'POST', // or 'PUT'
             body: JSON.stringify(data),

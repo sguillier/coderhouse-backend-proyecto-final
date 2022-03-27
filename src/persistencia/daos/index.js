@@ -1,4 +1,4 @@
-import { persistencia, mongooseConfig, txtConfig } from './configDaos.js'
+import { persistencia, txtConfig } from './configDaos.js'
 
 
 export default async function getColeccion(nombreColeccion) {
@@ -9,11 +9,6 @@ export default async function getColeccion(nombreColeccion) {
         case 'txt':
             const { default: ContenedorArchivo } = await import('./../contenedores/ContenedorArchivo.js')
             objetoColeccion = new ContenedorArchivo(txtConfig.fileName[nombreColeccion])
-            break
-
-        case 'mongoose':
-            const { default: ContenedorMongoose } = await import('../contenedores/ContenedorMongoose.js')
-            objetoColeccion = new ContenedorMongoose(nombreColeccion, mongooseConfig.esquema[nombreColeccion])
             break
 
         case 'mongodb':

@@ -2,7 +2,7 @@ import { URL_RAIZ } from "../../../url/index.js"
 import EnviaCarrito from "./EnviaCarrito.js"
 import IngresaProducto from "./IngresaProducto.js"
 import Productos from "./Productos.js"
-import Carritos from "./Carritos.js"
+import Ordenes from "./Ordenes.js"
 
 
 const NavBar = async (user) => {
@@ -26,7 +26,7 @@ const NavBar = async (user) => {
             </li>
 
             <li class="nav-item">
-                <a id="link-carritos" class="nav-link">Carritos</a>
+                <a id="link-ordenes" class="nav-link">Ordenes</a>
             </li>
 
             <li class="nav-item">
@@ -58,9 +58,9 @@ const NavBar = async (user) => {
         EnviaCarrito()
     })
 
-    const linkCarrito = document.getElementById('link-carritos')
-    linkCarrito.addEventListener('click', () => {
-        Carritos()
+    const linkOrdenes = document.getElementById('link-ordenes')
+    linkOrdenes.addEventListener('click', () => {
+        Ordenes()
     })
 
     const linkChat = document.getElementById('link-chat')

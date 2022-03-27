@@ -56,10 +56,14 @@ const Productos = async () => {
 
     items.forEach(item => {
         const botonEliminar = document.getElementById(`item-card-button-delete-${item.id}`)
-        botonEliminar.addEventListener('click', () => { eliminar(item.id) })
+        botonEliminar.addEventListener('click', async () => { 
+            await eliminar(item.id) 
+        })
 
         const botonEditar = document.getElementById(`item-card-button-edit-${item.id}`)
-        botonEditar.addEventListener('click', () => { EditaProducto(item) })
+        botonEditar.addEventListener('click', async () => { 
+            await EditaProducto(item) 
+        })
     })
 
 

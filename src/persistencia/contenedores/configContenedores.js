@@ -14,14 +14,6 @@ export default {
             useUnifiedTopology: true,
         }
     },
-    mongoose: {
-        stringConexion: 'srv+mongodb://localhost/coderhouse',
-        options: {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000
-        }
-    },
     firebase: {
         type: process.env.FIREBASE_type,
         project_id: process.env.FIREBASE_project_id,

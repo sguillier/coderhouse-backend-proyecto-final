@@ -1,19 +1,19 @@
-import {URL_RAIZ} from "../../../url/index.js"
+import { URL_RAIZ } from "../../../url/index.js"
 
-const EditaCarrito = async (carrito) => {
+const EditaOrden = async (orden) => {
 
     // console.log(items)
 
-    const arrayCarrito = carrito.productos
-    let total = carrito.total
+    const arrayOrden = orden.productos
+    let total = orden.total
 
 
 
-    let html = ` <h2> Modificar Carrito</h2> <br>
+    let html = ` <h2> Modificar Orden</h2> <br>
     <div class="cart-container">
     `
 
-    arrayCarrito.forEach(item => {
+    arrayOrden.forEach(item => {
         html += `
         <div class="item-cart">
             <div class="item-cart-img-container">
@@ -38,7 +38,7 @@ const EditaCarrito = async (carrito) => {
                     </div>
                     <hr />
                     <div class="item-cart-cost">
-                        Costo: $ <span id="item-cart-costo-${item.id}"> ${item.precio*item.q} </span> usd
+                        Costo: $ <span id="item-cart-costo-${item.id}"> ${item.precio * item.q} </span> usd
                     </div>
                     </div>
         </div>
@@ -51,15 +51,15 @@ const EditaCarrito = async (carrito) => {
         Total: $ <span id="cart-total"> ${total} </span> usd
     </div>
     <div>
-        <button id="cart-button-send">Modifica Carrito</button>
+        <button id="cart-button-send">Modifica Orden</button>
     </div>
     
     </div>`
 
     document.getElementById('main').innerHTML = html
-    
 
-    arrayCarrito.forEach(item => {
+
+    arrayOrden.forEach(item => {
         const botonMas = document.getElementById(`item-cart-button-mas-${item.id}`)
         botonMas.addEventListener('click', () => { agrega(item.id, 1) })
 
@@ -69,50 +69,50 @@ const EditaCarrito = async (carrito) => {
     });
 
     const agrega = (id, num) => {
-        const i = arrayCarrito.findIndex(e => e.id === id)
-        const quantity = arrayCarrito[i].q
+        const i = arrayOrden.findIndex(e => e.id === id)
+        const quantity = arrayOrden[i].q
 
         if (0 <= (quantity + num)) {
-            arrayCarrito[i].q = quantity + num
-            total += arrayCarrito[i].precio * (num)
+            arrayOrden[i].q = quantity + num
+            total += arrayOrden[i].precio * (num)
 
             document.getElementById(`item-cart-quantity-${id}`).innerText = quantity + num
-            document.getElementById(`item-cart-costo-${id}`).innerText = arrayCarrito[i].precio * (quantity + num)
+            document.getElementById(`item-cart-costo-${id}`).innerText = arrayOrden[i].precio * (quantity + num)
             document.getElementById("cart-total").innerText = total
         }
     }
 
     const botonEnviar = document.getElementById("cart-button-send")
-    botonEnviar.addEventListener('click', () => {
-        
+    botonEnviar.addEventListener('click', async () => {
+
         const ahora = new Date()
         const data = {
-            creado: carrito.creado,
+            creado: orden.creado,
             modificado: ahora.toLocaleString(),
-            productos: arrayCarrito,
+            productos: arrayOrden,
             total: total
         }
-        
-        const urlApi = URL_RAIZ + '/api/carritos/' + carrito.id
-        fetch(urlApi, {
+
+        const urlApi = URL_RAIZ + '/api/ordenes/' + orden.id
+        await fetch(urlApi, {
             method: 'PUT', // or 'POST'
             body: JSON.stringify(data),
-            headers:{ 'Content-Type': 'application/json' }
-          }).then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(response => console.log('Success:', response));
-          
-          html = `
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response));
+
+        html = `
           <div>
-              <h2>Carrito enditado con éxito</h2>
+              <h2>Orden editada con éxito</h2>
           </div>
           `
-          document.getElementById('main').innerHTML = html
-        
+        document.getElementById('main').innerHTML = html
+
     })
 
 
 
 }
 
-export default EditaCarrito
+export default EditaOrden
